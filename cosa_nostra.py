@@ -500,9 +500,9 @@ def graph2json(g):
 #-----------------------------------------------------------------------
 class view_cluster_json:
   def GET(self):
-    if not 'user' in session or session.user is None:
-      f = register_form()
-      return render.login(f)
+    # if not 'user' in session or session.user is None:
+    #   f = register_form()
+    #   return render.login(f)
 
     i = web.input(id=None)
     if i.id is None or not i.id.isdigit():
@@ -520,6 +520,7 @@ class view_cluster_json:
     g = CGraph()
     g.fromDict(json.loads(g_text))
     json_graph = graph2json(g)
+    web.header('Access-Control-Allow-Origin', '*')
     return json_graph
 
 #-----------------------------------------------------------------------
